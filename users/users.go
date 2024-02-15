@@ -3,17 +3,18 @@ package users
 import (
 	"time"
 
-	"duomly.com/go-bank-backend/database"
-	"duomly.com/go-bank-backend/helpers"
-	"duomly.com/go-bank-backend/interfaces"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/leonasting/Banking-Application/database"
+	"github.com/leonasting/Banking-Application/helpers"
+	"github.com/leonasting/Banking-Application/interfaces"
 	"golang.org/x/crypto/bcrypt"
 )
+
 // Refactor prepareToken
 func prepareToken(user *interfaces.User) string {
 	tokenContent := jwt.MapClaims{
 		"user_id": user.ID,
-		"expiry": time.Now().Add(time.Minute * 60).Unix(),
+		"expiry":  time.Now().Add(time.Minute * 60).Unix(),
 	}
 	jwtToken := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tokenContent)
 	token, err := jwtToken.SignedString([]byte("TokenPassword"))
@@ -21,18 +22,19 @@ func prepareToken(user *interfaces.User) string {
 
 	return token
 }
+
 // Refactor prepareResponse
 func prepareResponse(user *interfaces.User, accounts []interfaces.ResponseAccount, withToken bool) map[string]interface{} {
 	responseUser := &interfaces.ResponseUser{
-		ID: user.ID,
+		ID:       user.ID,
 		Username: user.Username,
-		Email: user.Email,
+		Email:    user.Email,
 		Accounts: accounts,
 	}
 	var response = map[string]interface{}{"message": "all is fine"}
 	// Add withToken feature to prepare response
 	if withToken {
-		var token = prepareToken(user);
+		var token = prepareToken(user)
 		response["jwt"] = token
 	}
 	response["data"] = responseUser
@@ -62,8 +64,7 @@ func Login(username string, pass string) map[string]interface{} {
 		accounts := []interfaces.ResponseAccount{}
 		database.DB.Table("accounts").Select("id, name, balance").Where("user_id = ? ", user.ID).Scan(&accounts)
 
-
-		var response = prepareResponse(user, accounts, true);
+		var response = prepareResponse(user, accounts, true)
 
 		return response
 	} else {
@@ -97,7 +98,7 @@ func Register(username string, email string, pass string) map[string]interface{}
 	} else {
 		return map[string]interface{}{"message": "not valid values"}
 	}
-	
+
 }
 
 // Refactor GetUser function to use database package
@@ -112,9 +113,9 @@ func GetUser(id string, jwt string) map[string]interface{} {
 		accounts := []interfaces.ResponseAccount{}
 		database.DB.Table("accounts").Select("id, name, balance").Where("user_id = ? ", user.ID).Scan(&accounts)
 
-		var response = prepareResponse(user, accounts, false);
+		var response = prepareResponse(user, accounts, false)
 		return response
 	} else {
 		return map[string]interface{}{"message": "Not valid token"}
-	 }
+	}
 }

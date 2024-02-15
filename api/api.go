@@ -7,10 +7,10 @@ import (
 	"log"
 	"net/http"
 
-	"duomly.com/go-bank-backend/helpers"
-	"duomly.com/go-bank-backend/transactions"
-	"duomly.com/go-bank-backend/useraccounts"
-	"duomly.com/go-bank-backend/users"
+	"github.com/leonasting/Banking-Application/helpers"
+	"github.com/leonasting/Banking-Application/transactions"
+	"github.com/leonasting/Banking-Application/useraccounts"
+	"github.com/leonasting/Banking-Application/users"
 
 	"github.com/gorilla/mux"
 )
@@ -22,14 +22,14 @@ type Login struct {
 
 type Register struct {
 	Username string
-	Email string
+	Email    string
 	Password string
 }
 
 type TransactionBody struct {
 	UserId uint
-	From uint
-	To uint
+	From   uint
+	To     uint
 	Amount int
 }
 
@@ -37,9 +37,10 @@ type TransactionBody struct {
 func readBody(r *http.Request) []byte {
 	body, err := ioutil.ReadAll(r.Body)
 	helpers.HandleErr(err)
-	
+
 	return body
 }
+
 // Refactor apiResponse
 func apiResponse(call map[string]interface{}, w http.ResponseWriter) {
 	if call["message"] == "all is fine" {

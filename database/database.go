@@ -1,8 +1,8 @@
 package database
 
 import (
-	"duomly.com/go-bank-backend/helpers"
 	"github.com/jinzhu/gorm"
+	"github.com/leonasting/Banking-Application/helpers"
 )
 
 // Create global variable

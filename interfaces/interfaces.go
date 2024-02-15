@@ -4,44 +4,44 @@ import "github.com/jinzhu/gorm"
 
 type User struct {
 	gorm.Model
-  Username string
-	Email string
+	Username string
+	Email    string
 	Password string
 }
 
 type Account struct {
 	gorm.Model
-  Type string
-	Name string
+	Type    string
+	Name    string
 	Balance uint
-	UserID uint
+	UserID  uint
 }
 
 // Create transaction interface
 type Transaction struct {
 	gorm.Model
-  From uint
-	To uint
+	From   uint
+	To     uint
 	Amount int
 }
 
 type ResponseTransaction struct {
-	ID uint
-	From uint
-	To uint
+	ID     uint
+	From   uint
+	To     uint
 	Amount int
 }
 
 type ResponseAccount struct {
-	ID uint
-	Name string
+	ID      uint
+	Name    string
 	Balance int
 }
 
 type ResponseUser struct {
-	ID uint
+	ID       uint
 	Username string
-	Email string
+	Email    string
 	Accounts []ResponseAccount
 }
 

@@ -1,10 +1,10 @@
 package migrations
 
 import (
-	"duomly.com/go-bank-backend/database"
-	"duomly.com/go-bank-backend/helpers"
-	"duomly.com/go-bank-backend/interfaces"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/leonasting/Banking-Application/database"
+	"github.com/leonasting/Banking-Application/helpers"
+	"github.com/leonasting/Banking-Application/interfaces"
 )
 
 // Refactor createAccounts to use database package
@@ -30,7 +30,8 @@ func Migrate() {
 	Account := &interfaces.Account{}
 	Transactions := &interfaces.Transaction{}
 	database.DB.AutoMigrate(&User, &Account, &Transactions)
-	
+
 	createAccounts()
 }
+
 // Delete Migrate transactions
