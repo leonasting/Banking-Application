@@ -1,33 +1,33 @@
-// package helpers
+package helpers
 
-// import (
-// 	"encoding/json"
-// 	"log"
-// 	"net/http"
-// 	"regexp"
-// 	"strconv"
-// 	"strings"
+import (
+	// 	"encoding/json"
+	// 	"log"
+	// 	"net/http"
+	// 	"regexp"
+	// 	"strconv"
+	// 	"strings"
 
-// 	"github.com/dgrijalva/jwt-go"
-// 	"github.com/leonasting/Banking-Application/interfaces"
-// 	_ "github.com/lib/pq"
-// 	"golang.org/x/crypto/bcrypt"
-// )
+	// 	"github.com/dgrijalva/jwt-go"
+	// 	"github.com/leonasting/Banking-Application/interfaces"
+	// 	_ "github.com/lib/pq"
+	"golang.org/x/crypto/bcrypt"
+)
 
-// // Basic error handler
-// func HandleErr(err error) {
-// 	if err != nil {
-// 		panic(err.Error())
-// 	}
-// }
+// Basic error handler
+func HandleErr(err error) {
+	if err != nil {
+		panic(err.Error())
+	}
+}
 
-// // Hash and salt password for encoding and decoding
-// func HashAndSalt(pass []byte) string {
-// 	hashed, err := bcrypt.GenerateFromPassword(pass, bcrypt.MinCost)
-// 	HandleErr(err)
+// Hash and salt password for encoding and decoding
+func HashAndSalt(pass []byte) string {
+	hashed, err := bcrypt.GenerateFromPassword(pass, bcrypt.MinCost)
+	HandleErr(err)
 
-// 	return string(hashed)
-// }
+	return string(hashed)
+}
 
 // // Delete ConnectDB from helpers
 

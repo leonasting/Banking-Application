@@ -31,14 +31,7 @@ Customer_Churn_Analysis/
 ## Run
 
 - Setup a PostgreSQL db
-- You need to setup your connection string in the two files, vulnerable-db.go, and migrations.go
-- Start migration by commenting migration in main.go and commenting API
-- Type  (that will migrate to your db):
-```
-go run main.go
-```
-- Comment migration and uncomment api
-- Type:
+- Create database with Name bankingapp and update connection details in connectDb(migration.go)
 ```
 go run main.go
 ```
@@ -58,3 +51,9 @@ go mod init github.com/leonasting/Banking-Application
 It contains schema interfaces for User and Account.
 * User has Username, email and password as fields. This interface contains users personal details.
 * Account has type, name, balance and userid.This contains users acount details.
+
+## Flow of logic
+
+Main Function calls migragtion function.
+Migration function first connects with DB and creates the two interfces.
+Migration function Again conects to DB to insert Users which are hardcoded.
