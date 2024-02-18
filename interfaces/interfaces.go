@@ -1,21 +1,21 @@
-// package interfaces
+package interfaces
 
-// import "github.com/jinzhu/gorm"
+import "github.com/jinzhu/gorm"
 
-// type User struct {
-// 	gorm.Model
-// 	Username string
-// 	Email    string
-// 	Password string
-// }
+type User struct {
+	gorm.Model
+	Username string
+	Email    string
+	Password string
+}
 
-// type Account struct {
-// 	gorm.Model
-// 	Type    string
-// 	Name    string
-// 	Balance uint
-// 	UserID  uint
-// }
+type Account struct {
+	gorm.Model
+	Type    string
+	Name    string
+	Balance uint
+	UserID  uint
+}
 
 // // Create transaction interface
 // type Transaction struct {
@@ -32,18 +32,18 @@
 // 	Amount int
 // }
 
-// type ResponseAccount struct {
-// 	ID      uint
-// 	Name    string
-// 	Balance int
-// }
+type ResponseAccount struct {
+	ID      uint
+	Name    string
+	Balance int
+}
 
-// type ResponseUser struct {
-// 	ID       uint
-// 	Username string
-// 	Email    string
-// 	Accounts []ResponseAccount
-// }
+type ResponseUser struct {
+	ID       uint
+	Username string
+	Email    string
+	Accounts []ResponseAccount
+}
 
 // // Create Validation interface
 // type Validation struct {

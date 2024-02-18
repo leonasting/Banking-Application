@@ -10,7 +10,12 @@ import (
 
 	// 	"github.com/dgrijalva/jwt-go"
 	// 	"github.com/leonasting/Banking-Application/interfaces"
-	// 	_ "github.com/lib/pq"
+	"crypto/md5"
+	"encoding/hex"
+	"fmt"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/lib/pq"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -27,6 +32,25 @@ func HashAndSalt(pass []byte) string {
 	HandleErr(err)
 
 	return string(hashed)
+}
+
+// Hash only vulnerable
+func HashOnlyVulnerable(pass []byte) string {
+	hash := md5.New()
+	hash.Write(pass)
+	return hex.EncodeToString(hash.Sum(nil))
+}
+
+// Connect to database
+func ConnectDB() *gorm.DB {
+	db, err := gorm.Open("postgres", "host=0.0.0.0 port=5432 user=postgres dbname=bankapp password=postgres sslmode=disable")
+	HandleErr(err)
+	if err != nil {
+		fmt.Println("Debug", err)
+	} else {
+		fmt.Println("Debug", "Connected to database")
+	}
+	return db
 }
 
 // // Delete ConnectDB from helpers
