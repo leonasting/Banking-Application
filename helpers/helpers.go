@@ -4,17 +4,19 @@ import (
 	// 	"encoding/json"
 	// 	"log"
 	// 	"net/http"
-	// 	"regexp"
-	// 	"strconv"
+	// "regexp"
+	// "strconv"
 	// 	"strings"
 
 	// 	"github.com/dgrijalva/jwt-go"
-	// 	"github.com/leonasting/Banking-Application/interfaces"
+
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
+	"regexp"
 
 	"github.com/jinzhu/gorm"
+	"github.com/leonasting/Banking-Application/interfaces"
 	_ "github.com/lib/pq"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -55,29 +57,29 @@ func ConnectDB() *gorm.DB {
 
 // // Delete ConnectDB from helpers
 
-// // Create validation
-// func Validation(values []interfaces.Validation) bool {
-// 	username := regexp.MustCompile(`^([A-Za-z0-9]{5,})+$`)
-// 	email := regexp.MustCompile(`^[A-Za-z0-9]+[@]+[A-Za-z0-9]+[.]+[A-Za-z]+$`)
+// Create validation
+func Validation(values []interfaces.Validation) bool {
+	username := regexp.MustCompile(`^([A-Za-z0-9]{5,})+$`)
+	email := regexp.MustCompile(`^[A-Za-z0-9]+[@]+[A-Za-z0-9]+[.]+[A-Za-z]+$`)
 
-// 	for i := 0; i < len(values); i++ {
-// 		switch values[i].Valid {
-// 		case "username":
-// 			if !username.MatchString(values[i].Value) {
-// 				return false
-// 			}
-// 		case "email":
-// 			if !email.MatchString(values[i].Value) {
-// 				return false
-// 			}
-// 		case "password":
-// 			if len(values[i].Value) < 5 {
-// 				return false
-// 			}
-// 		}
-// 	}
-// 	return true
-// }
+	for i := 0; i < len(values); i++ {
+		switch values[i].Valid {
+		case "username":
+			if !username.MatchString(values[i].Value) {
+				return false
+			}
+		case "email":
+			if !email.MatchString(values[i].Value) {
+				return false
+			}
+		case "password":
+			if len(values[i].Value) < 5 {
+				return false
+			}
+		}
+	}
+	return true
+}
 
 // // Create panic handler
 // func PanicHandler(next http.Handler) http.Handler {

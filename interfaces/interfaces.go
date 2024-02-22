@@ -45,11 +45,11 @@ type ResponseUser struct {
 	Accounts []ResponseAccount
 }
 
-// // Create Validation interface
-// type Validation struct {
-// 	Value string
-// 	Valid string
-// }
+// Create Validation interface
+type Validation struct {
+	Value string
+	Valid string
+}
 
 // type ErrResponse struct {
 // 	Message string
